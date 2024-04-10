@@ -146,7 +146,7 @@ public class Main {
     }
 
     public static void ejercicio3(){
-        String pass = "Hola_dfgvdfb1";
+        String pass = "Hola_1234";
 
         Function<String, Boolean> validarContra = contra -> {
             boolean mayus = contra.chars()
