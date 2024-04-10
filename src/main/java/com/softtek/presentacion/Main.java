@@ -148,7 +148,7 @@ public class Main {
     public static void ejercicio3(){
         String pass = "Hola_1234";
 
-        Function<String, Boolean> validarContra = contra -> {
+        /*Function<String, Boolean> validarContra = contra -> {
             boolean mayus = contra.chars()
                     .anyMatch(c -> Character.isUpperCase(c));
             boolean minus = contra.chars()
@@ -161,6 +161,21 @@ public class Main {
             if (contra.length()>=8 && mayus && minus && num && caracterEspecial) return true;
             return false;
         };
-        System.out.println(validarContra.apply(pass));
+        System.out.println(validarContra.apply(pass));*/
+
+        Function<String, Boolean> mayus = contra -> contra.chars()
+                .anyMatch(c -> Character.isUpperCase(c));
+        Function<String, Boolean> minus = contra -> contra.chars()
+                .anyMatch(c -> Character.isLowerCase(c));
+        Function<String, Boolean> num = contra -> contra.chars()
+                .anyMatch(c -> Character.isDigit(c));
+        Function<String, Boolean> caracterEspecial = contra -> contra.chars()
+                .anyMatch(c -> !Character.isLetterOrDigit(c));
+
+        if (mayus.apply(pass) && minus.apply(pass) && num.apply(pass) && caracterEspecial.apply(pass)){
+            System.out.println("Contraseña valida");
+        } else {
+            System.out.println("Contraseña invalida");
+        }
     }
 }
