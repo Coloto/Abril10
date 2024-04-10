@@ -150,7 +150,7 @@ public class Main {
 
         Function<String, Boolean> validarContra = contra -> {
             boolean mayus = contra.chars()
-                    .anyMatch(Character::isUpperCase);
+                    .anyMatch(c -> Character.isUpperCase(c));
             boolean minus = contra.chars()
                     .anyMatch(c -> Character.isLowerCase(c));
             boolean num = contra.chars()
