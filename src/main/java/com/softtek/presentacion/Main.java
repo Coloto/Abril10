@@ -5,6 +5,7 @@ import com.softtek.modelo.Person;
 import com.softtek.modelo.Stats;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.function.*;
@@ -17,8 +18,8 @@ public class Main {
         //ejemplo9();
 
         //ejercicio1();
-        //ejercicio2();
-        ejercicio3();
+        ejercicio2();
+        //ejercicio3();
     }
 
     private static void ejemplo1() {
@@ -137,12 +138,21 @@ public class Main {
         numeros.add(7);
         numeros.add(29);
 
-        Function<ArrayList<Integer>, Stats> estadisticas = listaNumeros -> new Stats(listaNumeros);
+        Function<ArrayList<Integer>, Stats> estadisticas = listaNumeros -> {
+            int min = Collections.min(listaNumeros);
+            int max = Collections.max(listaNumeros);
+            int total=0;
+            for (int n : listaNumeros){
+                total+=n;
+            }
+            double media = total/listaNumeros.size();
+
+            return new Stats(min, max, media);
+        };
+
 
         Stats stats = estadisticas.apply(numeros);
-        System.out.println(stats.maximo());
-        System.out.println(stats.minimo());
-        System.out.println(stats.media());
+        System.out.println(stats.toString());
     }
 
     public static void ejercicio3(){
@@ -172,10 +182,11 @@ public class Main {
         Function<String, Boolean> caracterEspecial = contra -> contra.chars()
                 .anyMatch(c -> !Character.isLetterOrDigit(c));
 
-        if (mayus.apply(pass) && minus.apply(pass) && num.apply(pass) && caracterEspecial.apply(pass)){
-            System.out.println("Contraseña valida");
-        } else {
-            System.out.println("Contraseña invalida");
-        }
+        if (mayus.apply(pass)
+                && minus.apply(pass)
+                && num.apply(pass)
+                && caracterEspecial.apply(pass)) System.out.println("Contraseña valida");
+
+
     }
 }
